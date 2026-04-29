@@ -1,0 +1,29 @@
+workflows:
+  ios-app-no-sign:
+    name: iOS .app (no codesign)
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+
+    scripts:
+      - name: Flutter pub get
+        script: |
+          flutter pub get
+
+      - name: Build iOS (no codesign)
+        script: |
+          flutter build ios --release --no-codesign
+
+      - name: Create .app artifact
+        script: |
+          mkdir -p output
+          cp -r build/ios/iphoneos/Runner.app output/
+
+      - name: Zip .app
+        script: |
+          cd output
+          zip -r Runner.app.zip Runner.app
+
+    artifacts:
+      - output/Runner.app.zip
