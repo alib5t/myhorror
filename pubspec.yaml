@@ -16,3 +16,8 @@ flutter:
   assets:
     - assets/image.png
     - assets/music.mp3
+    
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
